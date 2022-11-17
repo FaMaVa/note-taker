@@ -38,9 +38,8 @@ const readAndDelete = (content, file) => {
       const parsedNotes = JSON.parse(data);
       for (let i = 0; i < parsedNotes.length; i++) {
         if (content === parsedNotes[i].id) {
-          const index = parsedNotes.indexOf(parsedNotes[i], 0);
-          // const deletedNote = parsedNotes[i];
-          // console.log(deletedNote);
+          const deletedNote = parsedNotes[i];
+          const index = parsedNotes.indexOf(deletedNote, 0);
           parsedNotes.splice(index, 1);
           writeToFile(file, parsedNotes);
         };
