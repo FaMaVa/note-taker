@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
-const notesData = require('./Develop/db/db.json');
-const { readAndAppend, readAndDelete } = require('./Develop/helpers/fsUtils');
+const notesData = require('./db/db.json');
+const { readAndAppend, readAndDelete } = require('./helpers/fsUtils');
 const fs = require('fs');
 
 const PORT = process.env.PORT || 3001;
@@ -13,16 +13,16 @@ const uuid = uuidv4();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static('/Develop/public'));
+app.use(express.static('public'));
 
 // GET Route for homepage
 app.get('/', (req, res) =>
-    res.sendFile(path.join(__dirname, '/Develop/public/index.html'))
+    res.sendFile(path.join(__dirname, '/public/index.html'))
 );
 
 // GET Route for notes.html
 app.get('/notes', (req, res) =>
-    res.sendFile(path.join(__dirname, '/Develop/public/notes.html'))
+    res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
 
 // Get request for notes
@@ -46,7 +46,7 @@ app.post('/api/notes', (req, res) => {
             id: uuid
         }
         // Read db.json file and push new note into data
-        readAndAppend(newNote, './Develop/db/db.json');
+        readAndAppend(newNote, './db/db.json');
 
         const response = {
             status: 'success',
@@ -63,7 +63,7 @@ app.post('/api/notes', (req, res) => {
 
 app.delete('/api/notes/:id', (req, res) => {
     const deletedId = req.params.id
-    readAndDelete(deletedId, './Develop/db/db.json')
+    readAndDelete(deletedId, './db/db.json')
     
 });
 
