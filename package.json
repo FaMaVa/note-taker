@@ -5,12 +5,12 @@
     "node": "18.12.1",
     "npm": "8.19.2"
   },
-  "description": "",
-  "main": "server.js",
+  "description": "A note taking app",
+  "main": "public/assets/js/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "FaMaVa",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
