@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
-const notesData = require('./db/db.json');
-const { readAndAppend, readAndDelete } = require('./helpers/fsUtils');
+const notesData = require('./Develop/db/db.json');
+const { readAndAppend, readAndDelete } = require('./Develop/helpers/fsUtils');
 const fs = require('fs');
 
 const PORT = process.env.PORT || 3001;
