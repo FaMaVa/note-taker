@@ -25,13 +25,15 @@ app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
 
+
+app.route('/api/notes')
 // Get request for notes
-app.get('/api/notes', (req, res) => res.json(notesData));
+    .get((req, res) => res.json(notesData))
 
 
 
 // Post request for submitting note
-app.post('/api/notes', (req, res) => {
+    .post((req, res) => {
 
     // Destructuring assignment for the items in req.body
     const { title, text } = req.body;
