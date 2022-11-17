@@ -13,16 +13,16 @@ const uuid = uuidv4();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static('public'));
+app.use(express.static('/Develop/public'));
 
 // GET Route for homepage
 app.get('/', (req, res) =>
-    res.sendFile(path.join(__dirname, '/public/index.html'))
+    res.sendFile(path.join(__dirname, '/Develop/public/index.html'))
 );
 
 // GET Route for notes.html
 app.get('/notes', (req, res) =>
-    res.sendFile(path.join(__dirname, '/public/notes.html'))
+    res.sendFile(path.join(__dirname, '/Develop/public/notes.html'))
 );
 
 // Get request for notes
@@ -46,7 +46,7 @@ app.post('/api/notes', (req, res) => {
             id: uuid
         }
         // Read db.json file and push new note into data
-        readAndAppend(newNote, './db/db.json');
+        readAndAppend(newNote, './Develop/db/db.json');
 
         const response = {
             status: 'success',
@@ -63,7 +63,7 @@ app.post('/api/notes', (req, res) => {
 
 app.delete('/api/notes/:id', (req, res) => {
     const deletedId = req.params.id
-    readAndDelete(deletedId, './db/db.json')
+    readAndDelete(deletedId, './Develop/db/db.json')
     
 });
 
