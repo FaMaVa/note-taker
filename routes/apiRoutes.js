@@ -6,7 +6,6 @@ const readAndDelete = fsUtils.readAndDelete;
 const readFromFile = fsUtils.readFromFile;
 
 const { v4: uuidv4 } = require('uuid');
-const uuid = uuidv4();
 
 // Get request for notes
 route.get('/notes', (req, res) => {
@@ -26,7 +25,7 @@ route.post('/notes', (req, res) => {
         const newNote = {
             title,
             text,
-            id: uuid
+            id: uuidv4()
         }
         // Read db.json file and push new note into data
         readAndAppend(newNote, 'db/db.json');
@@ -44,10 +43,22 @@ route.post('/notes', (req, res) => {
     }
 });
 
+// Delete request for notes
 route.delete('/notes/:id', (req, res) => {
-    const deletedId = req.params.id
-    readAndDelete(deletedId, 'db/db.json')
-    
+    if (typeof(req.params.id) == "string") {
+        const deletedId = req.params.id;
+        readAndDelete(deletedId, 'db/db.json');
+
+        const response = {
+            status: 'success',
+            body: deletedId + "deleted",
+        };
+
+        console.log(response);
+        res.status(201).json(response);
+    } else {
+        res.status(500).json('Error in posting note!');
+    }
 });
 
 module.exports = route;

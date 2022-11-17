@@ -19,6 +19,8 @@ const writeToFile = (destination, content) =>
  *  @param {string} file The path to the file you want to save to.
  *  @returns {void} Nothing
  */
+
+//Save Notes
 const readAndAppend = (content, file) => {
   fs.readFile(file, 'utf8', (err, data) => {
     if (err) {
@@ -30,20 +32,18 @@ const readAndAppend = (content, file) => {
     }
   });
 };
+
+//Delete Notes
 const readAndDelete = (content, file) => {
   fs.readFile(file, 'utf8', (err, data) => {
     if (err) {
       console.error(err);
     } else {
+      console.log(content);
       const parsedNotes = JSON.parse(data);
-      for (let i = 0; i < parsedNotes.length; i++) {
-        if (content === parsedNotes[i].id) {
-          const deletedNote = parsedNotes[i];
-          const index = parsedNotes.indexOf(deletedNote, 0);
-          parsedNotes.splice(index, 1);
-          writeToFile(file, parsedNotes);
-        };
-      };
+      const newNotes = parsedNotes.filter(item => item.id !== content);
+      // console.log(newNotes);
+      writeToFile(file, newNotes);
     }
   });
 };
